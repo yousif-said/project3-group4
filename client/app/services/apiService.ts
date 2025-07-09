@@ -4,17 +4,19 @@ import type { FeatureImportance, PredictionInputData, PredictionResult } from '.
 const API_BASE_URL: string = 'https://api.example.com';
 
 export const makePrediction = async (data: PredictionInputData): Promise<PredictionResult> => {
+  // For development/demo purposes, return mock data if API fails
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Returning mock data for development');
+    return getMockPredictionResult(data);
+  }
+
   try {
     const response = await axios.post<PredictionResult>(`${API_BASE_URL}/predict`, data);
     return response.data;
   } catch (error) {
     console.error('API Error:', error);
     
-    // For development/demo purposes, return mock data if API fails
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Returning mock data for development');
-      return getMockPredictionResult(data);
-    }
+
     
     throw error;
   }
@@ -22,17 +24,17 @@ export const makePrediction = async (data: PredictionInputData): Promise<Predict
 
 
 export const getFeatureImportance = async (): Promise<FeatureImportance[]> => {
+  // For development/demo purposes, return mock data if API fails
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Returning mock data for development');
+    return getMockImportance();
+  }
+  
   try {
     const response = await axios.post<FeatureImportance[]>(`${API_BASE_URL}/importance`);
     return response.data;
   } catch (error) {
     console.error('API Error:', error);
-    
-    // For development/demo purposes, return mock data if API fails
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Returning mock data for development');
-      return getMockImportance();
-    }
     
     throw error;
   }
