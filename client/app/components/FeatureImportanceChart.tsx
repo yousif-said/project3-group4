@@ -3,6 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import type { FeatureImportance } from '../types';
 
 import { useState, useEffect } from 'react'
+import { getFeatureImportance } from '~/services/apiService';
 
 interface FeatureImportanceChartProps {
   features: FeatureImportance[];
@@ -13,7 +14,10 @@ const FeatureImportanceChart: React.FC = () => {
   const [features, setFeatures] = useState<FeatureImportance[]>([])
 
   useEffect(()=> {
-    
+    (async () => {
+      const importance = await getFeatureImportance()
+      setFeatures(importance)
+    })()
   }, [])
   
   const sortedFeatures = [...features].sort((a, b) => b.importance - a.importance);

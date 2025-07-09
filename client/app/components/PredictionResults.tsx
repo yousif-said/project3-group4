@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FeatureImportanceChart from './FeatureImportanceChart';
-import type { PredictionResult } from '../types';
+import type { PredictionInputData, PredictionResult } from '../types';
+import { useSearchParams } from 'react-router-dom';
+import { makePrediction } from '~/services/apiService';
 
 const PredictionResults = () => {
   const navigate = useNavigate();
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  let [searchParams] = useSearchParams();
 
   useEffect(() => {
-    
+    (async () => {
+      const homeworld = searchParams.get("homeworld")
+      const unitType = searchParams.get("unitType")
+      
+      if(homeworld && unitType){
+        const predictionInput : PredictionInputData = {
+          homeworld,
+          unitType
+        }
+  
+        await makePrediction(predictionInput)
+      }
+    })()
   }, []);
 
   const handleNewPrediction = () => {

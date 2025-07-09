@@ -58,14 +58,7 @@ const InputForm: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Call API service to make prediction
-      const result = await makePrediction(formData);
-      
-      // Store result in localStorage to access it in the results page
-      localStorage.setItem('predictionResult', JSON.stringify(result));
-      
-      // Navigate to results page
-      navigate('/results');
+      navigate(`/results?homeworld=${formData.homeworld}&unitType=${formData.unitType}`);
     } catch (error) {
       console.error('Prediction error:', error);
       setErrors({
