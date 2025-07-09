@@ -38,5 +38,20 @@ def feature_importance():
     return jsonify(result)
 
 
+@app.route('/metadata', methods=['GET'])
+def get_metadata():
+    features = model.feature_names_in_
+    
+    #extract unique values from one-hot encoded feature names
+    homeworlds = sorted({f.replace("homeworld_", "") for f in features if f.startswith("homeworld_")})
+    unit_types = sorted({f.replace("unit_type_", "") for f in features if f.startswith("unit_type_")})
+    
+    return jsonify({
+        "homeworlds": homeworlds,
+        "unit_types": unit_types
+    })
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

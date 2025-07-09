@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { makePrediction } from '../services/apiService';
+import { getPredictionMetadata } from '../services/apiService';
+import { useEffect } from 'react';
 
 import type { PredictionInputData, FormErrors } from '../types';
 
@@ -13,9 +15,22 @@ const InputForm: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Available options for form select fields
-  const homeworldOptions: string[] = ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn'];
-  const unitTypeOptions: string[] = ['Infantry', 'Cavalry', 'Artillery', 'Air Force', 'Navy'];
+  const [homeworldOptions, setHomeworldOptions] = useState<string[]>([]);
+  const [unitTypeOptions, setUnitTypeOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const metadata = await getPredictionMetadata();
+        setHomeworldOptions(metadata.homeworlds);
+        setUnitTypeOptions(metadata.unit_types);
+      } catch (error) {
+        console.error("Failed to load metadata:", error);
+      }
+    })();
+  }, []);
+
+
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const { name, value } = e.target;

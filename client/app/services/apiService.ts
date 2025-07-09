@@ -15,9 +15,7 @@ export const makePrediction = async (data: PredictionInputData): Promise<Predict
     return response.data;
   } catch (error) {
     console.error('API Error:', error);
-    
-
-    
+        
     throw error;
   }
 };
@@ -39,6 +37,12 @@ export const getFeatureImportance = async (): Promise<FeatureImportance[]> => {
     throw error;
   }
 };
+
+export const getPredictionMetadata = async (): Promise<{ homeworlds: string[], unit_types: string[] }> => {
+  const response = await axios.get(`${API_BASE_URL}/metadata`);
+  return response.data;
+};
+
 
 
 const getMockPredictionResult = (inputData: PredictionInputData): PredictionResult => {
