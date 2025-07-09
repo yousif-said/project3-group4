@@ -10,10 +10,6 @@ export function Home() {
         <div className="container mx-auto px-4 py-8">
           <InputForm />
         </div>
-        <div className="container mx-auto px-4 py-8">
-          <FeatureImportanceChart />
-        </div>
-
       </div>
     </main>
   );

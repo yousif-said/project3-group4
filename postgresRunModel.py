@@ -1,16 +1,30 @@
 import pandas as pd
 import pickle
+from sqlalchemy import create_engine
 
 # Load the model from the pickle file
 with open('trained_model.pkl', 'rb') as file:
     clf = pickle.load(file)
 
-# Load the data from the Parquet file into a DataFrame
-df = pd.read_parquet('troop_movements_1m.parquet')
+# Define your connection parameters
+username = "project"
+password = "wasadmin"
+host = "18.191.130.184"  # This could be an IP address
+port = "5432"  # Default PostgreSQL port
+database_name = "team_D"
+
+# Create a connection string
+connection_string = f"postgresql+psycopg2://{username}:{password}@{host}:{port}/{database_name}"
+
+# Create a SQLAlchemy engine
+engine = create_engine(connection_string)
+
+# Load the data from the PostgreSQL table into a DataFrame
+query = "SELECT * FROM troop_movements_1m"
+df = pd.read_sql(query, engine)
 
 # Assuming 'homeworld' and 'unit_type' are the features used for prediction
 df_encoded = pd.get_dummies(df, columns=['homeworld', 'unit_type'])
-
 
 expected_features = clf.feature_names_in_  # Use the feature names from the model
 

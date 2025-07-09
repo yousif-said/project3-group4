@@ -23,12 +23,20 @@ const PredictionResults = () => {
           unitType
         }
   
-        const prediction = await makePrediction(predictionInput)
+         try {
+        const result = await makePrediction(predictionInput)
+        setResult(result)
+      } catch (err) {
+        setError("Failed to fetch prediction.")
+      } finally {
         setLoading(false)
-        setResult(prediction)
       }
-    })()
-  }, []);
+    } else {
+      setError("Missing input values.")
+      setLoading(false)
+    }
+  })()
+}, [])
 
   const handleNewPrediction = () => {
     navigate('/');
@@ -86,10 +94,10 @@ const PredictionResults = () => {
                 <p className="text-sm text-blue-600">Predicted Outcome</p>
                 <p className="text-2xl font-bold">{result.prediction.outcome}</p>
             </div>
-            <div>
+            {/* <div>
                 <p className="text-sm text-blue-600">Confidence</p>
                 <p className="text-2xl font-bold">{(result.prediction.confidence * 100).toFixed(1)}%</p>
-            </div>
+            </div> */}
             </div>
         </div>
         

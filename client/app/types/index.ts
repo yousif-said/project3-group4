@@ -7,7 +7,7 @@ export interface PredictionInputData {
   // Prediction result types
   export interface PredictionOutcome {
     outcome: string;
-    confidence: number;
+    // confidence: number;
   }
   
   // Feature importance type
