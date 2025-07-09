@@ -42,6 +42,18 @@ const PredictionResults = () => {
     navigate('/');
   };
 
+  const capitalizeWords = (str : string) : string => {
+    if (!str) return ''; // Handle null, undefined, or empty strings
+    return str
+      .split(' ') // Split the string into an array of words
+      .map(word => {
+        if (word.length === 0) return ''; // Handle empty strings that might result from multiple spaces
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); // Capitalize first letter, lowercase rest
+      })
+      .join(' '); // Join the words back into a single string
+  };
+  
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64 min-w-1/2">
@@ -78,7 +90,7 @@ const PredictionResults = () => {
             <div className="grid grid-cols-2 gap-4">
             <div>
                 <p className="text-sm text-gray-500">Homeworld</p>
-                <p className="font-medium">{result.input.homeworld}</p>
+                <p className="font-medium">{capitalizeWords(result.input.homeworld)}</p>
             </div>
             <div>
                 <p className="text-sm text-gray-500">Unit Type</p>
@@ -92,7 +104,7 @@ const PredictionResults = () => {
             <div className="flex items-center justify-between">
             <div>
                 <p className="text-sm text-blue-600">Predicted Outcome</p>
-                <p className="text-2xl font-bold">{result.prediction.outcome}</p>
+                <p className="text-2xl font-bold">{capitalizeWords(result.prediction.outcome)}</p>
             </div>
             {/* <div>
                 <p className="text-sm text-blue-600">Confidence</p>
