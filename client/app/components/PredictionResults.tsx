@@ -23,7 +23,9 @@ const PredictionResults = () => {
           unitType
         }
   
-        await makePrediction(predictionInput)
+        const prediction = await makePrediction(predictionInput)
+        setLoading(false)
+        setResult(prediction)
       }
     })()
   }, []);
