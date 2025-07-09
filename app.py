@@ -20,5 +20,16 @@ def predict():
     prediction = model.predict(df_encoded)[0]
     return jsonify({"prediction": prediction})
 
+@app.route('/feature-importance', methods=['GET'])
+def feature_importance():
+    importances = model.feature_importances_
+    features = model.feature_names_in_
+    result = [
+        {"feature": feature, "importance": float(importance)}
+        for feature, importance in zip(features, importances)
+    ]
+    return jsonify(result)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
