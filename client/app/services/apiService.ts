@@ -23,10 +23,10 @@ export const makePrediction = async (data: PredictionInputData): Promise<Predict
 
 export const getFeatureImportance = async (): Promise<FeatureImportance[]> => {
   // For development/demo purposes, return mock data if API fails
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Returning mock data for development');
-    return getMockImportance();
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   console.log('Returning mock data for development');
+  //   return getMockImportance();
+  // }
   
   try {
     const response = await axios.get<FeatureImportance[]>(`${API_BASE_URL}/feature-importance`);

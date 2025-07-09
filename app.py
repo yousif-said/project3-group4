@@ -32,7 +32,7 @@ def feature_importance():
     importances = model.feature_importances_
     features = model.feature_names_in_
     result = [
-        {"feature": feature, "importance": float(importance)}
+        {"name": feature, "importance": float(importance)}
         for feature, importance in zip(features, importances)
     ]
     return jsonify(result)
