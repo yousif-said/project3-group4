@@ -13,7 +13,6 @@ const InputForm: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Available options for form select fields
   const homeworldOptions: string[] = ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn'];
   const unitTypeOptions: string[] = ['Infantry', 'Cavalry', 'Artillery', 'Air Force', 'Navy'];
 

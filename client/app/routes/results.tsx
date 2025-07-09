@@ -3,8 +3,8 @@ import { ResultsPage } from "../components/ResultsPage";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Results" },
-    { name: "description", content: "Home to React Router!" },
+    { title: "Star Wars Prediction Results" },
+    { name: "description", content: "Results for Starwars Prediction!" },
   ];
 }
 

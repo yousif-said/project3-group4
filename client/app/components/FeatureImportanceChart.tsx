@@ -5,10 +5,6 @@ import type { FeatureImportance } from '../types';
 import { useState, useEffect } from 'react'
 import { getFeatureImportance } from '~/services/apiService';
 
-interface FeatureImportanceChartProps {
-  features: FeatureImportance[];
-}
-
 const FeatureImportanceChart: React.FC = () => {
 
   const [features, setFeatures] = useState<FeatureImportance[]>([])
