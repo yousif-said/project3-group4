@@ -8,12 +8,10 @@ with open('trained_model.pkl', 'rb') as file:
 # Load the data from the Parquet file into a DataFrame
 df = pd.read_parquet('troop_movements_1m.parquet')
 
-# Prepare the data for prediction
 # Assuming 'homeworld' and 'unit_type' are the features used for prediction
 df_encoded = pd.get_dummies(df, columns=['homeworld', 'unit_type'])
 
-# Ensure the columns match the training data
-# You might need to add missing columns with zeros if they were not present in the training data
+
 expected_features = clf.feature_names_in_  # Use the feature names from the model
 
 # Add missing columns with zeros
