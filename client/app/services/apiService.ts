@@ -1,14 +1,8 @@
 import axios from 'axios';
-import type { PredictionInputData, PredictionResult } from '../types';
+import type { FeatureImportance, PredictionInputData, PredictionResult } from '../types';
 
-// Base URL for API
 const API_BASE_URL: string = 'https://api.example.com';
 
-/**
- * Makes a prediction request to the API
- * @param {PredictionInputData} data - The input data for prediction
- * @returns {Promise<PredictionResult>} - The prediction result
- */
 export const makePrediction = async (data: PredictionInputData): Promise<PredictionResult> => {
   try {
     const response = await axios.post<PredictionResult>(`${API_BASE_URL}/predict`, data);
@@ -26,15 +20,28 @@ export const makePrediction = async (data: PredictionInputData): Promise<Predict
   }
 };
 
-/**
- * Generates mock prediction data for development/testing
- * @param {PredictionInputData} inputData - The input data
- * @returns {PredictionResult} - Mock prediction result
- */
+
+export const getFeatureImportance = async (): Promise<FeatureImportance[]> => {
+  try {
+    const response = await axios.post<FeatureImportance[]>(`${API_BASE_URL}/importance`);
+    return response.data;
+  } catch (error) {
+    console.error('API Error:', error);
+    
+    // For development/demo purposes, return mock data if API fails
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Returning mock data for development');
+      return getMockImportance();
+    }
+    
+    throw error;
+  }
+};
+
+
 const getMockPredictionResult = (inputData: PredictionInputData): PredictionResult => {
-  // Generate a deterministic but seemingly random confidence based on inputs
   const hash = inputData.homeworld.length * 7 + inputData.unitType.length * 3;
-  const confidence = 0.5 + (hash % 50) / 100; // Between 0.5 and 0.99
+  const confidence = 0.5 + (hash % 50) / 100;
   
   return {
     input: { ...inputData },
@@ -50,3 +57,20 @@ const getMockPredictionResult = (inputData: PredictionInputData): PredictionResu
     ]
   };
 };
+
+const getMockImportance = () : FeatureImportance[] => {
+  return [
+    {
+      name: "Region",
+      importance: 100,
+    },
+    {
+      name: "Job",
+      importance: 80,
+    },
+    {
+      name: "Planet",
+      importance: 30,
+    }
+  ]
+}

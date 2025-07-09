@@ -10,22 +10,7 @@ const PredictionResults = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Retrieve prediction result from localStorage
-    const storedResult = localStorage.getItem('predictionResult');
     
-    if (storedResult) {
-      try {
-        const parsedResult = JSON.parse(storedResult);
-        setResult(parsedResult);
-      } catch (err) {
-        setError('Failed to parse prediction results');
-        console.error('Error parsing results:', err);
-      }
-    } else {
-      setError('No prediction results found');
-    }
-    
-    setLoading(false);
   }, []);
 
   const handleNewPrediction = () => {
@@ -91,10 +76,6 @@ const PredictionResults = () => {
             </div>
         </div>
         
-        <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Feature Importance</h3>
-            <FeatureImportanceChart features={result.featureImportance} />
-        </div>
       </>}
       
       <button

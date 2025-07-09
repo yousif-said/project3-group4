@@ -2,15 +2,23 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import type { FeatureImportance } from '../types';
 
+import { useState, useEffect } from 'react'
+
 interface FeatureImportanceChartProps {
   features: FeatureImportance[];
 }
 
-const FeatureImportanceChart: React.FC<FeatureImportanceChartProps> = ({ features }) => {
-  // Sort features by importance value in descending order
+const FeatureImportanceChart: React.FC = () => {
+
+  const [features, setFeatures] = useState<FeatureImportance[]>([])
+
+  useEffect(()=> {
+    
+  }, [])
+  
   const sortedFeatures = [...features].sort((a, b) => b.importance - a.importance);
   
-  // Generate colors based on importance (higher importance = darker blue)
+  
   const getBarColor = (value: number): string => {
     const maxImportance = Math.max(...features.map(f => f.importance));
     const intensity = Math.round((value / maxImportance) * 100);

@@ -1,5 +1,6 @@
 import Navbar from "./NavBar";
 import InputForm from "./InputForm";
+import FeatureImportanceChart from "./FeatureImportanceChart";
 
 export function Home() {
   return (
@@ -9,6 +10,10 @@ export function Home() {
         <div className="container mx-auto px-4 py-8">
           <InputForm />
         </div>
+        <div className="container mx-auto px-4 py-8">
+          <FeatureImportanceChart />
+        </div>
+
       </div>
     </main>
   );
