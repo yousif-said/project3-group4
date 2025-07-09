@@ -1,5 +1,5 @@
-import type { Route } from "./+types/home";
-import { Home } from "../components/Home";
+import type { Route } from "./+types/features";
+import { FeaturePage } from "~/components/FeatureImportancePage";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Homepage() {
-  return <Home />;
+  return <FeaturePage />;
 }
