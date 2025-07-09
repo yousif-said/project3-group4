@@ -42,7 +42,7 @@ const FeatureImportanceChart: React.FC = () => {
         <BarChart
           data={sortedFeatures}
           layout="vertical"
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 5, right: 80, left: 80, bottom: 5 }}
           barCategoryGap={0}
         >
           <CartesianGrid strokeDasharray="3 3" />

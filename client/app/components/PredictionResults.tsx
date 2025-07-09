@@ -44,7 +44,7 @@ const PredictionResults = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
+      <div className="flex justify-center items-center h-64 min-w-1/2">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
@@ -52,7 +52,7 @@ const PredictionResults = () => {
 
   if (error) {
     return (
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 min-w-1/2">
         <div className="p-4 mb-4 bg-red-100 text-red-700 rounded-md">
           <p>{error}</p>
         </div>
@@ -67,7 +67,7 @@ const PredictionResults = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 min-w-1/2">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
         Prediction Results
       </h2>
